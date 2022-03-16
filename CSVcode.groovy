@@ -11,9 +11,9 @@ import com.softwareag.jira.exalate.helper.*
 def log = Logger.getLogger("com.acme.CreateSubtask")
 def productCodes = getProductCodeList()
 
-log.debug("MOUNA2 "+productCodes)
 log.setLevel(Level.DEBUG)
-//String getProjectKey(String recipient, String productCode, String platform)
+
+
 def file = new File("D:\\itrac-shared-home\\scripts\\com\\output.groovy")
 
 

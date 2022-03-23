@@ -6,8 +6,11 @@ import groovy.sql.Sql
 import org.ofbiz.core.entity.ConnectionFactory
 import org.ofbiz.core.entity.DelegatorInterface
 import java.sql.Connection
-import com.softwareag.jira.exalate.helper.*
+import com.softwareag.jira.exalate.Helper.*
 import groovy.xml.MarkupBuilder
+import org.apache.log4j.Logger;
+import groovy.json.JsonSlurper
+
 
 def writer = new StringWriter()
 def xml = new MarkupBuilder(writer)
@@ -44,7 +47,7 @@ def line ="ProductCode,"
 
     
    
-    
+   //def entry2=Helper.getProjectKey("Development", "AAA", "ZS") 
   
 recipients.each{recipient ->
     platforms.each{platform ->
@@ -73,7 +76,8 @@ xml.table(id:"scriptField"){
         th("CloudOps-UX")
     }
     
-         
+
+   
 productCodes.each{productCode ->
     count=count+1
     line=productCode+","
@@ -87,11 +91,12 @@ productCodes.each{productCode ->
        
         platforms.each{platform ->
 		        def entry=""
-
+            //def entry2=Helper.getProjectKey("Development", "AAA", "ZS") 
+            
                 try{
-                    log.debug("PLATFORM "+platform+" recipient "+ recipient +" productCode "+ productCode+" key: "+Helper.getProjectKey(recipient, productCode, platform) )
+                   // log.debug("PLATFORM "+platform+" recipient "+ recipient +" productCode "+ productCode+" key: "+Helper.getProjectKey(recipient, productCode, platform) )
 
-                     entry=Helper.getProjectKey(recipient, productCode, platform)
+                     entry=getProjectKey(recipient, productCode, platform)
 
                      line=line+entry+","   
                     
@@ -152,4 +157,5 @@ def getProductCodeList() {
     }
     return productCodeList
 }
-    
+
+
